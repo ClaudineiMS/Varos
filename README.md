@@ -109,4 +109,30 @@ Este projeto utiliza o ESLint para garantir boas práticas de codificação. A s
 
 Essas regras ajudam a manter o código **limpo**, **legível**, **acessível** e **organizado**, seguindo as melhores práticas ao trabalhar com **React** e **TypeScript**.
 
-### **Prisma ORM**
+## **Prisma ORM**
+
+Esta aplicação utiliza o Prisma ORM para gerenciar e acessar o banco de dados.
+
+- **`DATABASE_URL="file:./dev.db"`**
+  É um banco de dados sqllite
+
+### Prisma Studio
+
+Para visualizar e editar os dados através de uma interface gráfica, execute:
+
+**Passo 1:** Vá até o diretório do backend:
+
+```bash
+cd Varos/src/backend
+```
+
+**Passo 2:** Execute o comando:
+
+```bash
+npx prisma studio
+```
+
+💡 O Prisma Studio abrirá automaticamente em:  
+🔗 [http://localhost:5555](http://localhost:5555)
+
+---
