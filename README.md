@@ -109,4 +109,4 @@ Este projeto utiliza o ESLint para garantir boas práticas de codificação. A s
 
 Essas regras ajudam a manter o código **limpo**, **legível**, **acessível** e **organizado**, seguindo as melhores práticas ao trabalhar com **React** e **TypeScript**.
 
-
+### **Prisma ORM**
