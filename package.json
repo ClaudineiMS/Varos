@@ -2,9 +2,6 @@
   "name": "desafio_front",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "src/backend"
-  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

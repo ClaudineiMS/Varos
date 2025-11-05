@@ -1,16 +1,17 @@
 "use client";
 
-import { JSX } from "react";
+import { JSX, useState } from "react";
 
 import Header from "@/components/cabecalho/Header";
 import SummaryCard from "@/components/dashboard/SummaryCard";
 import Filters from "@/components/dashboard/Filters";
 import CreateUserButton from "@/components/dashboard/CreateUserButton";
 import Table from "@/components/dashboard/Table";
-import { useUsers } from "@/hooks/useUsers";
+import { useFilteredUsers } from "@/hooks/useFilteredUsers";
 
 export default function Dashboard(): JSX.Element {
-  const { users, loading } = useUsers();
+  const [filters, setFilters] = useState({ nome: "", email: "", data: "" });
+  const { users, loading } = useFilteredUsers(filters);
 
   return (
     <div className="min-h-screen bg-[#131313] text-white flex flex-col">
@@ -34,10 +35,9 @@ export default function Dashboard(): JSX.Element {
         >
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 w-full">
             <SummaryCard />
-
             <div className="flex flex-col w-full lg:w-auto items-start lg:items-end gap-4">
               <CreateUserButton />
-              <Filters />
+              <Filters filters={filters} setFilters={setFilters} />
             </div>
           </div>
 
