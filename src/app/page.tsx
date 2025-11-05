@@ -32,13 +32,49 @@ export default function Dashboard(): JSX.Element {
             overflow-hidden
           "
         >
-          <div className="flex justify-between items-center">
-            <SummaryCard />
-            <CreateUserButton />
+          <div className="flex justify-between items-end">
+            <div
+              className="
+                    mt-2 
+                    w-1/10
+                    bg-linear-to-br 
+                    from-[rgba(255,255,255,0.08)] 
+                    to-[rgba(255,255,255,0.02)] 
+                    border 
+                    border-[rgba(255,255,255,0.1)] 
+                    rounded-xl 
+                    p-3 
+                    shadow-lg 
+                    backdrop-blur-sm
+                    transition hover:bg-[rgba(255,255,255,0.1)]
+                  "
+            >
+              <SummaryCard />
+            </div>
+            <div className="flex flex-col items-end">
+              <CreateUserButton />
+              <div className="mt-2 w-full">
+                <div
+                  className="
+                    mt-2 
+                    w-full 
+                    bg-linear-to-br 
+                    from-[rgba(255,255,255,0.08)] 
+                    to-[rgba(255,255,255,0.02)] 
+                    border 
+                    border-[rgba(255,255,255,0.1)] 
+                    rounded-xl 
+                    p-1 
+                    shadow-lg 
+                    backdrop-blur-sm
+                    transition hover:bg-[rgba(255,255,255,0.1)]
+                  "
+                >
+                  <Filters />
+                </div>
+              </div>
+            </div>
           </div>
-
-          <Filters />
-
           {loading ? (
             <p className="text-gray-400 text-center mt-10">
               Carregando usuários...
