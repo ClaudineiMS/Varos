@@ -9,10 +9,10 @@ export function useUsers(): { users: User[]; loading: boolean } {
 
   useEffect(() => {
     api
-      .get("/users")
-      .then((data) => {
+      .get<User[]>("/users")
+      .then((users) => {
         setUsers(
-          data.map((u: any) => ({
+          users.map((u) => ({
             id: u.id,
             nome: u.nome,
             email: u.email,
