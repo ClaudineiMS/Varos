@@ -25,10 +25,20 @@ export async function fetchUserSummary(): Promise<UserSummary> {
   return api.get<UserSummary>("/users/count");
 }
 
+// Função para criar usuários
 export async function createUser(data: CreateUserData): Promise<User> {
   try {
     return await api.post<User>("/users/create", data);
   } catch (err: any) {
     throw new Error(err.message || "Erro desconhecido ao criar usuário");
   }
+}
+
+// Função para deletar usuários
+export async function deleteUser(id: number): Promise<void> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("Erro ao deletar usuário");
 }

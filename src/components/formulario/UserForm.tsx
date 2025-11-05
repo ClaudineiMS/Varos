@@ -10,6 +10,7 @@ import UserBasicInfo from "./UserBasicInfo";
 import UserAdditionalInfo from "./UserAdditionalInfo";
 import AdditionalTabs from "./AdditionalTabs";
 import ClientsInput from "./ClientsInput";
+import UserDelete from "./UserDelete";
 
 import { CreateUserFormData } from "@/types/User";
 import { createUser } from "@/lib/api";
@@ -83,10 +84,10 @@ export default function UserForm(): JSX.Element {
     <div className="w-full max-w-[700px] mx-auto p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
       <HeaderButtons activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="border-t border-[rgba(255,255,255,0.1)] my-4" />
-      <h4 className="text-2sm font-semibold mb-6">Criar Usuário</h4>
 
       {activeTab === "basic" ? (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <h4 className="text-2sm font-semibold mb-1">Criar Usuário</h4>
           <ModalError message={error} />
 
           <UserTypeSelector userType={userType} setUserType={setUserType} />
@@ -130,8 +131,8 @@ export default function UserForm(): JSX.Element {
           </div>
         </form>
       ) : (
-        <div className="text-center text-gray-400 py-10">
-          Tela de deletar usuário (em desenvolvimento)
+        <div className="text-center">
+          <UserDelete />
         </div>
       )}
     </div>
