@@ -3,7 +3,7 @@
 :root {
   --Brand-Background-Varos-Neutral-Rest: #131313;
   --background: var(--Brand-Background-Varos-Neutral-Rest);
-  --foreground: #ededed; /* cor do texto para contraste */
+  --foreground: #ededed; 
 }
 
 @theme inline {

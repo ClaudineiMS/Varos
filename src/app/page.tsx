@@ -25,43 +25,28 @@ export default function Dashboard(): JSX.Element {
             bg-[rgba(30,30,30,0.6)] 
             border border-[rgba(255,255,255,0.08)] 
             shadow-2xl 
-            rounded-3xl 
+            rounded-sm 
             p-10 
             space-y-8 
             mt-6 
             overflow-hidden
           "
         >
-          <div className="flex justify-between items-end">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 w-full">
             <SummaryCard />
-            <div className="flex flex-col items-end">
+
+            <div className="flex flex-col w-full lg:w-auto items-start lg:items-end gap-4">
               <CreateUserButton />
-              <div className="mt-2 w-full">
-                <div
-                  className="
-                    mt-2 
-                    w-full 
-                    bg-[#1e1
-                    border 
-                    border-[rgba(255,255,255,0.08)]
-                    rounded-sm 
-                    shadow-md 
-                    backdrop-blur-sm
-                    transition 
-                    hover:bg-[#333333]  
-                  "
-                >
-                  <Filters />
-                </div>
-              </div>
+              <Filters />
             </div>
           </div>
+
           {loading ? (
             <p className="text-gray-400 text-center mt-10">
               Carregando usuários...
             </p>
           ) : (
-            <div className="overflow-y-auto max-h-[70vh] pr-2">
+            <div className="overflow-y-auto max-h-[70vh] w-full">
               <Table users={users} />
             </div>
           )}
