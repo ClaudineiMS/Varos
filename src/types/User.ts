@@ -14,3 +14,21 @@ export interface UserSummary {
   total: number;
   last7Days: number;
 }
+
+export interface CreateUserData {
+  nome: string;
+  email: string;
+  telefone?: string;
+  cpf?: string;
+  idade?: number;
+  endereco?: string;
+}
+
+export interface CreateUserFormData {
+  nome: string;
+  email: string;
+  telefone?: string;
+  cpf?: string;
+  idade?: number;
+  endereco?: string;
+}
