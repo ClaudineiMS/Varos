@@ -33,24 +33,7 @@ export default function Dashboard(): JSX.Element {
           "
         >
           <div className="flex justify-between items-end">
-            <div
-              className="
-                    mt-2 
-                    w-1/10
-                    bg-linear-to-br 
-                    from-[rgba(255,255,255,0.08)] 
-                    to-[rgba(255,255,255,0.02)] 
-                    border 
-                    border-[rgba(255,255,255,0.1)] 
-                    rounded-xl 
-                    p-3 
-                    shadow-lg 
-                    backdrop-blur-sm
-                    transition hover:bg-[rgba(255,255,255,0.1)]
-                  "
-            >
-              <SummaryCard />
-            </div>
+            <SummaryCard />
             <div className="flex flex-col items-end">
               <CreateUserButton />
               <div className="mt-2 w-full">
@@ -58,16 +41,14 @@ export default function Dashboard(): JSX.Element {
                   className="
                     mt-2 
                     w-full 
-                    bg-linear-to-br 
-                    from-[rgba(255,255,255,0.08)] 
-                    to-[rgba(255,255,255,0.02)] 
+                    bg-[#1e1
                     border 
-                    border-[rgba(255,255,255,0.1)] 
-                    rounded-xl 
-                    p-1 
-                    shadow-lg 
+                    border-[rgba(255,255,255,0.08)]
+                    rounded-sm 
+                    shadow-md 
                     backdrop-blur-sm
-                    transition hover:bg-[rgba(255,255,255,0.1)]
+                    transition 
+                    hover:bg-[#333333]  
                   "
                 >
                   <Filters />

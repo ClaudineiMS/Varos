@@ -9,3 +9,8 @@ export interface User {
   criadoEm: string;
   atualizadoEm: string;
 }
+
+export interface UserSummary {
+  total: number;
+  last7Days: number;
+}
