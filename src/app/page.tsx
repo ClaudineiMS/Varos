@@ -2,11 +2,11 @@
 
 import { JSX } from "react";
 
-import Header from "@/components/Header";
-import SummaryCard from "@/components/SummaryCard";
-import Filters from "@/components/Filters";
-import CreateUserButton from "@/components/CreateUserButton";
-import Table from "@/components/Table";
+import Header from "@/components/cabecalho/Header";
+import SummaryCard from "@/components/dashboard/SummaryCard";
+import Filters from "@/components/dashboard/Filters";
+import CreateUserButton from "@/components/dashboard/CreateUserButton";
+import Table from "@/components/dashboard/Table";
 import { useUsers } from "@/hooks/useUsers";
 
 export default function Dashboard(): JSX.Element {

@@ -2,7 +2,7 @@
 
 import { JSX, useState } from "react";
 
-import UserForm from "@/components/modal/UserForm";
+import UserForm from "@/components/formulario/UserForm";
 
 export default function CreateUserPage(): JSX.Element {
   const [submitted] = useState(false);
