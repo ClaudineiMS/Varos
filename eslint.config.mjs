@@ -43,6 +43,8 @@ export default [
         document: "readonly",
         performance: "readonly",
         FormData: "readonly",
+        fetch: "readonly",
+        process: "readonly",
       },
     },
 
