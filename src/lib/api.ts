@@ -27,7 +27,7 @@ export async function fetchUserSummary(): Promise<UserSummary> {
 
 export async function createUser(data: CreateUserData): Promise<User> {
   try {
-    return await api.post<User>("/users", data);
+    return await api.post<User>("/users/create", data);
   } catch (err: any) {
     throw new Error(err.message || "Erro desconhecido ao criar usuário");
   }

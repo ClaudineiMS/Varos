@@ -35,4 +35,5 @@ export interface CreateUserFormData {
   cep?: string;
   estado?: string;
   complemento?: string;
+  clients?: string[];
 }

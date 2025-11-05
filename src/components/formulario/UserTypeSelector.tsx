@@ -2,9 +2,9 @@
 import { JSX } from "react";
 
 interface UserTypeSelectorProps {
-  userType: string;
-  // eslint-disable-next-line no-unused-vars
-  setUserType: (type: string) => void;
+  userType: "Cliente" | "Consultor";
+  // eslint-disable-next-line no-undef
+  setUserType: React.Dispatch<React.SetStateAction<"Cliente" | "Consultor">>;
 }
 
 export default function UserTypeSelector({
@@ -16,14 +16,12 @@ export default function UserTypeSelector({
       <label className="text-gray-400 text-sm">Tipo do usuário</label>
       <select
         value={userType}
-        onChange={(e) => setUserType(e.target.value)}
+        onChange={(e) => setUserType(e.target.value as "Cliente" | "Consultor")}
         className="bg-[#2a2a2a] p-2 rounded-sm text-sm w-full"
         required
       >
-        <option value="">Selecione o tipo do usuário</option>
-        <option value="admin">Admin</option>
-        <option value="cliente">Cliente</option>
-        <option value="outro">Outro</option>
+        <option value="Cliente">Cliente</option>
+        <option value="Consultor">Consultor</option>
       </select>
     </div>
   );

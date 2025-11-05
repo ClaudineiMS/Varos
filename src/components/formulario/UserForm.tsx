@@ -1,12 +1,15 @@
 /* eslint-disable no-undef */
 "use client";
 import { JSX, useState, useRef, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 import ModalError from "./ModalError";
 import HeaderButtons from "./HeaderButtons";
 import UserTypeSelector from "./UserTypeSelector";
 import UserBasicInfo from "./UserBasicInfo";
 import UserAdditionalInfo from "./UserAdditionalInfo";
+import AdditionalTabs from "./AdditionalTabs";
+import ClientsInput from "./ClientsInput";
 
 import { CreateUserFormData } from "@/types/User";
 import { createUser } from "@/lib/api";
@@ -15,10 +18,11 @@ export default function UserForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"basic" | "delete">("basic");
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState<"Cliente" | "Consultor">("Cliente");
   const [additionalTab, setAdditionalTab] = useState<"basicInfo" | "addClient">(
     "basicInfo"
   );
+  const router = useRouter();
 
   const nomeRef = useRef<HTMLInputElement>(null);
   const telefoneRef = useRef<HTMLInputElement>(null);
@@ -29,11 +33,16 @@ export default function UserForm(): JSX.Element {
   const estadoRef = useRef<HTMLInputElement>(null);
   const enderecoRef = useRef<HTMLInputElement>(null);
   const complementoRef = useRef<HTMLInputElement>(null);
+  const clientesRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    const clients = clientesRef.current?.value
+      ? clientesRef.current.value.split(",").map((c) => c.trim())
+      : [];
 
     const data: CreateUserFormData = {
       tipoUsuario: userType,
@@ -45,15 +54,28 @@ export default function UserForm(): JSX.Element {
         : undefined,
       cpf: cpfRef.current?.value || "",
       endereco: enderecoRef.current?.value || "",
+      clients: userType === "Consultor" ? clients : [],
     };
 
     try {
       await createUser(data);
-      alert("Usuário criado com sucesso!");
+      router.push("/"); // volta para o dashboard
     } catch (err: any) {
       setError(err.message || "Erro desconhecido ao criar usuário");
     } finally {
       setLoading(false);
+      // Limpar campos
+      [
+        nomeRef,
+        telefoneRef,
+        emailRef,
+        idadeRef,
+        cpfRef,
+        enderecoRef,
+        clientesRef,
+      ].forEach((ref) => {
+        if (ref.current) ref.current.value = "";
+      });
     }
   };
 
@@ -66,6 +88,7 @@ export default function UserForm(): JSX.Element {
       {activeTab === "basic" ? (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <ModalError message={error} />
+
           <UserTypeSelector userType={userType} setUserType={setUserType} />
           <UserBasicInfo
             nomeRef={nomeRef}
@@ -73,30 +96,11 @@ export default function UserForm(): JSX.Element {
             emailRef={emailRef}
           />
 
-          <div className="flex gap-2 mb-1 mt-4">
-            <button
-              type="button"
-              onClick={() => setAdditionalTab("basicInfo")}
-              className={`px-3 py-1 rounded-t-lg ${
-                additionalTab === "basicInfo"
-                  ? "bg-gray-600 text-white"
-                  : "bg-[#2a2a2a] text-gray-200"
-              }`}
-            >
-              Informações Básicas
-            </button>
-            <button
-              type="button"
-              onClick={() => setAdditionalTab("addClient")}
-              className={`px-3 py-1 rounded-t-lg ${
-                additionalTab === "addClient"
-                  ? "bg-gray-600 text-white"
-                  : "bg-[#2a2a2a] text-gray-200"
-              }`}
-            >
-              Adicionar Cliente
-            </button>
-          </div>
+          <AdditionalTabs
+            userType={userType}
+            additionalTab={additionalTab}
+            setAdditionalTab={setAdditionalTab}
+          />
 
           <div className="border-t border-[rgba(255,255,255,0.1)]" />
 
@@ -110,18 +114,9 @@ export default function UserForm(): JSX.Element {
               complementoRef={complementoRef}
             />
           )}
-          {additionalTab === "addClient" && (
-            <div className="p-2 bg-[#2a2a2a] rounded-b-lg flex flex-col gap-2">
-              <label className="text-gray-300" htmlFor="clientes">
-                Clientes
-              </label>
-              <input
-                id="clientes"
-                type="text"
-                placeholder="Digite o nome do cliente"
-                className="px-3 py-2 rounded bg-[#1e1e1e] text-white border border-gray-600 focus:outline-none focus:border-green-600"
-              />
-            </div>
+
+          {additionalTab === "addClient" && userType === "Consultor" && (
+            <ClientsInput clientesRef={clientesRef} />
           )}
 
           <div className="flex justify-end gap-2 mt-4">
