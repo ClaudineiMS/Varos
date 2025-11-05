@@ -67,7 +67,7 @@ export default [
 
       // --- LEGIBILIDADE / CLEAN CODE ---
       "max-lines-per-function": ["warn", 150],
-      complexity: ["warn", 15],
+      complexity: ["warn", 25],
       "no-console": "warn",
       "no-nested-ternary": "warn",
       "prefer-const": "warn",

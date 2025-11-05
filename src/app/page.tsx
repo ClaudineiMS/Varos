@@ -1,18 +1,16 @@
 "use client";
 
-import { JSX, useState } from "react";
+import { JSX } from "react";
 
 import Header from "@/components/Header";
 import SummaryCard from "@/components/SummaryCard";
 import Filters from "@/components/Filters";
 import CreateUserButton from "@/components/CreateUserButton";
 import Table from "@/components/Table";
-import UserModal from "@/components/modal/UserModal";
 import { useUsers } from "@/hooks/useUsers";
 
 export default function Dashboard(): JSX.Element {
   const { users, loading } = useUsers();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#131313] text-white flex flex-col">
@@ -38,7 +36,7 @@ export default function Dashboard(): JSX.Element {
             <SummaryCard />
 
             <div className="flex flex-col w-full lg:w-auto items-start lg:items-end gap-4">
-              <CreateUserButton onClick={() => setIsModalOpen(true)} />
+              <CreateUserButton />
               <Filters />
             </div>
           </div>
@@ -54,7 +52,6 @@ export default function Dashboard(): JSX.Element {
           )}
         </div>
       </main>
-      <UserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
