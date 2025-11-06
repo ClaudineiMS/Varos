@@ -166,3 +166,22 @@ O projeto segue a seguinte organização:
 
  - **`Clientes do consultor admin4:`**: 
 ![Filtro](public/images/Tela-2.png)
+
+---
+
+## **Considerações finais**
+Como este projeto se trata de um desafio técnico com tempo limitado, o escopo acabou sendo restringido, o que limitou alguns aprimoramentos que poderiam ser implementados.
+
+Apesar de funcional, o projeto ainda pode ser expandido em alguns pontos importantes:
+
+- **`Paginação de dados no dashboard:*** atualmente, o dashboard exibe todos os registros de uma vez, o que pode comprometer a performance quando o volume de dados aumenta. 
+
+- **`Busca de clientes do consultor:** idealmente, a pesquisa deveria retornar os resultados de forma paginada.
+
+- **`Outros incrementos possíveis:** melhorias na experiência do usuário, validações mais robustas nos formulários e otimizações no gerenciamento de estados e chamadas de API.
+
+Este projeto foi um bom exercício de organização de código, estruturação de componentes, integração com APIs e aplicação de boas práticas em React e TypeScript, mas ainda há espaço para evolução e refinamento, especialmente em cenários com grande volume de dados.
+
+Desde já agradeço pela oportunidade de participar deste desafio.
+
+---
