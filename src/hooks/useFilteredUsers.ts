@@ -27,7 +27,12 @@ export function useFilteredUsers(filters: FilterParams): {
         if (filters.email) params.append("email", filters.email);
         if (filters.data) params.append("data", filters.data);
 
-        const response = await api.get<User[]>(`/users?${params.toString()}`);
+        // Escolhe o endpoint dependendo se há algum filtro
+        const endpoint = params.toString()
+          ? `/users/clients-by-consultor?${params.toString()}`
+          : "/users";
+
+        const response = await api.get<User[]>(endpoint);
         setUsers(response);
       } catch (error) {
         throw new Error(`Erro ${error}`);
