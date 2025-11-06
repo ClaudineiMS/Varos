@@ -133,3 +133,12 @@ Toda nova feature ou correção foi feita na develop e posteriormente mergiada c
 ![Fluxo do Projeto](public/images/fluxo.png)
 
 ---
+
+## **Versão final**
+
+ - **`Tela inicial:`**: 
+![Fluxo do Projeto](public/images/Tela-1.png)
+
+
+ - **`Clientes do consultor admin4:`**: 
+![Fluxo do Projeto](public/images/Tela-2.png)
