@@ -12,7 +12,7 @@ export default function ClientsInput({
   return (
     <div className="p-2 bg-[#2a2a2a] rounded-b-lg flex flex-col gap-2">
       <label className="text-gray-300" htmlFor="clientes">
-        Clientes (separe por vírgula)
+        Cliente
       </label>
       <input
         id="clientes"

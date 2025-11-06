@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 "use client";
-import { JSX, useState, useRef, FormEvent } from "react";
+import { JSX, useState, useRef, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import ModalError from "./ModalError";
@@ -13,7 +13,7 @@ import ClientsInput from "./ClientsInput";
 import UserDelete from "./UserDelete";
 
 import { CreateUserFormData } from "@/types/User";
-import { createUser } from "@/lib/api";
+import { createUser, createConsultor } from "@/lib/api";
 
 export default function UserForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
@@ -35,6 +35,14 @@ export default function UserForm(): JSX.Element {
   const enderecoRef = useRef<HTMLInputElement>(null);
   const complementoRef = useRef<HTMLInputElement>(null);
   const clientesRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (userType === "Consultor") {
+      setAdditionalTab("addClient");
+    } else {
+      setAdditionalTab("basicInfo");
+    }
+  }, [userType]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -59,24 +67,17 @@ export default function UserForm(): JSX.Element {
     };
 
     try {
-      await createUser(data);
-      router.push("/"); // volta para o dashboard
+      if (userType === "Consultor") {
+        await createConsultor(data);
+      } else {
+        await createUser(data);
+      }
+
+      router.push("/");
     } catch (err: any) {
       setError(err.message || "Erro desconhecido ao criar usuário");
     } finally {
       setLoading(false);
-      // Limpar campos
-      [
-        nomeRef,
-        telefoneRef,
-        emailRef,
-        idadeRef,
-        cpfRef,
-        enderecoRef,
-        clientesRef,
-      ].forEach((ref) => {
-        if (ref.current) ref.current.value = "";
-      });
     }
   };
 
@@ -100,12 +101,14 @@ export default function UserForm(): JSX.Element {
           <AdditionalTabs
             userType={userType}
             additionalTab={additionalTab}
-            setAdditionalTab={setAdditionalTab}
+            setAdditionalTab={
+              userType === "Consultor" ? (): void => {} : setAdditionalTab
+            }
           />
 
           <div className="border-t border-[rgba(255,255,255,0.1)]" />
 
-          {additionalTab === "basicInfo" && (
+          {additionalTab === "basicInfo" && userType === "Cliente" && (
             <UserAdditionalInfo
               idadeRef={idadeRef}
               cepRef={cepRef}
@@ -116,7 +119,7 @@ export default function UserForm(): JSX.Element {
             />
           )}
 
-          {additionalTab === "addClient" && userType === "Consultor" && (
+          {additionalTab === "addClient" && (
             <ClientsInput clientesRef={clientesRef} />
           )}
 

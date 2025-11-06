@@ -42,3 +42,8 @@ export async function deleteUser(id: number): Promise<void> {
 
   if (!res.ok) throw new Error("Erro ao deletar usuário");
 }
+
+// Função para ciar consultor
+export async function createConsultor(data: CreateUserData): Promise<User> {
+  return await api.post<User>("/users/consultores", data);
+}
