@@ -134,6 +134,30 @@ Toda nova feature ou correção foi feita na develop e posteriormente mergiada c
 
 ---
 
+## **Estrutura de pastas** 
+
+O projeto segue a seguinte organização:
+
+- **app/:** contém as páginas principais e layouts da aplicação, incluindo a página inicial e o fluxo de criação de usuários (users/create).
+
+- **components/:** reúne todos os componentes reutilizáveis, divididos por funcionalidade:
+
+- **cabecalho/:** componentes de cabeçalho.
+
+- **dashboard/:** componentes da área de dashboard, como tabelas, filtros e cards de resumo.
+
+- **formulario/:** componentes de formulários e modais, incluindo inputs, abas adicionais e botões.
+
+- **hooks/:** hooks personalizados para gerenciar estados e lógicas como usuários filtrados e resumo de dados.
+
+- **lib/:** funções utilitárias e integração com APIs.
+
+- **types/:** definição de tipos TypeScript, como o tipo User.
+
+---
+
+![Pastas do projeto](public/images/Pastas.png)
+
 ## **Versão final**
 
  - **`Tela inicial:`**: 
