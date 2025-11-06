@@ -125,5 +125,11 @@ feat(consultor): Criação do cadastro de consultor
 fix(table): Ajuste do contorno da tabela
 feat(delete): Implementação da tela de remoção de usuários
 ```
+---
+### **Padrão de desenvolvimento**
+A montagem do ambiente de desenvolvimento foi feita inicialmente na main. A partir dai a main foi conectada ao Vercel e foi criado a develop.
+Toda nova feature ou correção foi feita na develop e posteriormente mergiada com a main para ir para produção.
+
+![Fluxo do Projeto](public/images/fluxo.png)
 
 ---
