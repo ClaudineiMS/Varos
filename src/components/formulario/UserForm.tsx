@@ -31,7 +31,7 @@ export default function UserForm(): JSX.Element {
   const idadeRef = useRef<HTMLInputElement>(null);
   const cepRef = useRef<HTMLInputElement>(null);
   const cpfRef = useRef<HTMLInputElement>(null);
-  const estadoRef = useRef<HTMLInputElement>(null);
+  const estadoRef = useRef<HTMLSelectElement>(null);
   const enderecoRef = useRef<HTMLInputElement>(null);
   const complementoRef = useRef<HTMLInputElement>(null);
   const clientesRef = useRef<HTMLInputElement>(null);

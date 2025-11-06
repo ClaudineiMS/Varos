@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 "use client";
-import { JSX } from "react";
+import { JSX, useEffect } from "react";
+import IMask from "imask";
 
 interface UserBasicInfoProps {
   nomeRef: React.RefObject<HTMLInputElement | null>;
@@ -13,6 +14,15 @@ export default function UserBasicInfo({
   telefoneRef,
   emailRef,
 }: UserBasicInfoProps): JSX.Element {
+  useEffect(() => {
+    // Máscara de telefone
+    if (telefoneRef.current) {
+      IMask(telefoneRef.current, {
+        mask: [{ mask: "(00) 0000-0000" }, { mask: "(00) 00000-0000" }],
+      });
+    }
+  }, [telefoneRef]);
+
   return (
     <>
       <div className="flex gap-2 mt-2">
@@ -31,6 +41,7 @@ export default function UserBasicInfo({
             ref={telefoneRef}
             className="bg-[#2a2a2a] p-2 rounded-sm text-sm"
             placeholder="Telefone"
+            required
           />
         </div>
       </div>
