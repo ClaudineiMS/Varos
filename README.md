@@ -105,12 +105,12 @@ Este projeto utiliza o ESLint para garantir boas práticas de codificação. A s
 - **`jsx-a11y/no-autofocus: "warn"`**  
   Emite um **aviso** quando o atributo `autofocus` é utilizado, já que pode interferir na experiência de usuários com deficiência.
 
----
-
 Essas regras ajudam a manter o código **limpo**, **legível**, **acessível** e **organizado**, seguindo as melhores práticas ao trabalhar com **React** e **TypeScript**.
 
+---
+
 ## **Padrão de Commits**
-Este projeto utiliza o GitFlow como estratégia de branching e segue um padrão inspirado em Conventional Commits para os commits. Esse padrão organiza melhor o histórico de alterações, facilita a revisão de código e permite identificar rapidamente o tipo de mudança realizada.
+Este projeto utiliza o **GitFlow** como estratégia de branching e segue um padrão inspirado em Conventional Commits para os commits. Esse padrão organiza melhor o histórico de alterações, facilita a revisão de código e permite identificar rapidamente o tipo de mudança realizada.
 
 ### **Estrutura do commit**
 
@@ -128,4 +128,6 @@ fix(hook): Ajuste do hook para lidar com a nova pesquisa
 feat(consultor): Criação do cadastro de consultor
 fix(table): Ajuste do contorno da tabela
 feat(delete): Implementação da tela de remoção de usuários
-``
+```
+
+---
