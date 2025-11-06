@@ -1,29 +1,36 @@
 "use client";
-import { JSX, useState, ChangeEvent } from "react";
+import { JSX, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import IMask from "imask";
 
 import { deleteUser } from "@/lib/api";
 
 export default function UserDelete(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string>("");
+  const [cpf, setCpf] = useState<string>("");
   const router = useRouter();
 
   // eslint-disable-next-line no-undef
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setUserId(e.target.value.replace(/\D/g, ""));
+  const cpfRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (cpfRef.current) {
+      IMask(cpfRef.current, {
+        mask: "000.000.000-00",
+      });
+    }
+  }, []);
+
+  const handleChange = (): void => {
+    if (cpfRef.current) {
+      setCpf(cpfRef.current.value);
+    }
   };
 
   const handleDelete = async (): Promise<void> => {
-    if (!userId) {
-      setError("ID do usuário não informado");
-      return;
-    }
-
-    const idNumber = Number(userId);
-    if (isNaN(idNumber) || idNumber <= 0) {
-      setError("ID inválido");
+    if (!cpf) {
+      setError("CPF do usuário não informado");
       return;
     }
 
@@ -31,13 +38,14 @@ export default function UserDelete(): JSX.Element {
     setError(null);
 
     try {
-      await deleteUser(idNumber);
+      await deleteUser(cpf);
       router.push("/");
     } catch (err: any) {
       setError(err.message || "Erro desconhecido ao deletar usuário");
     } finally {
       setLoading(false);
-      setUserId("");
+      setCpf("");
+      if (cpfRef.current) cpfRef.current.value = "";
     }
   };
 
@@ -47,9 +55,9 @@ export default function UserDelete(): JSX.Element {
       {error && <p className="text-red-500">{error}</p>}
 
       <input
+        ref={cpfRef}
         type="text"
-        placeholder="Digite o ID do usuário"
-        value={userId}
+        placeholder="Digite o CPF do usuário"
         onChange={handleChange}
         className="px-3 py-2 rounded bg-[#1e1e1e] text-white border border-gray-600 focus:outline-none focus:border-red-500 w-1/2 text-center"
       />

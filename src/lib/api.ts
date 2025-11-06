@@ -35,8 +35,8 @@ export async function createUser(data: CreateUserData): Promise<User> {
 }
 
 // Função para deletar usuários
-export async function deleteUser(id: number): Promise<void> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+export async function deleteUser(cpf: string): Promise<void> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${cpf}`, {
     method: "DELETE",
   });
 
