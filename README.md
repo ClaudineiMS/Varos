@@ -108,3 +108,24 @@ Este projeto utiliza o ESLint para garantir boas práticas de codificação. A s
 ---
 
 Essas regras ajudam a manter o código **limpo**, **legível**, **acessível** e **organizado**, seguindo as melhores práticas ao trabalhar com **React** e **TypeScript**.
+
+## **Padrão de Commits**
+Este projeto utiliza o GitFlow como estratégia de branching e segue um padrão inspirado em Conventional Commits para os commits. Esse padrão organiza melhor o histórico de alterações, facilita a revisão de código e permite identificar rapidamente o tipo de mudança realizada.
+
+### **Estrutura do commit**
+
+Cada commit segue a seguinte estrutura:
+```
+<tipo>(<escopo opcional>): <descrição curta>
+```
+
+Tipos mais utilizados: feat, fix, docs...
+
+ - **`Exemplos de commits no projeto:`**: 
+ ```
+feat(mask): Implementação de máscaras para validar os dados dos inputs
+fix(hook): Ajuste do hook para lidar com a nova pesquisa
+feat(consultor): Criação do cadastro de consultor
+fix(table): Ajuste do contorno da tabela
+feat(delete): Implementação da tela de remoção de usuários
+``
