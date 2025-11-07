@@ -47,3 +47,35 @@ export async function deleteUser(cpf: string): Promise<void> {
 export async function createConsultor(data: CreateUserData): Promise<User> {
   return await api.post<User>("/users/consultores", data);
 }
+
+// Função para buscar usuário pelo CPF
+export async function fetchUserByCpf(cpf: string): Promise<User> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/cpf/${cpf}`
+  );
+  if (!res.ok) {
+    throw new Error("Erro ao buscar usuário pelo CPF");
+  }
+  return res.json() as Promise<User>;
+}
+
+// Função para atualizar usuário pelo CPF
+export async function updateUserByCpf(
+  cpf: string,
+  data: CreateUserData
+): Promise<User> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/cpf/${cpf}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Erro ao atualizar usuário");
+  }
+
+  return res.json() as Promise<User>;
+}

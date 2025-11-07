@@ -2,9 +2,9 @@
 import { JSX } from "react";
 
 interface HeaderButtonsProps {
-  activeTab: "basic" | "delete";
+  activeTab: "basic" | "delete" | "edit";
   // eslint-disable-next-line no-unused-vars
-  setActiveTab: (tab: "basic" | "delete") => void;
+  setActiveTab: (tab: "basic" | "delete" | "edit") => void;
 }
 
 export default function HeaderButtons({
@@ -23,6 +23,18 @@ export default function HeaderButtons({
       >
         Criar Usuário
       </button>
+
+      <button
+        className={`px-3 py-1 rounded-[48] border ${
+          activeTab === "edit"
+            ? "bg-yellow-600 text-white"
+            : "bg-[#2a2a2a] text-gray-200"
+        } hover:bg-yellow-500 transition`}
+        onClick={() => setActiveTab("edit")}
+      >
+        Editar Usuário
+      </button>
+
       <button
         className={`px-3 py-1 rounded-[48] border ${
           activeTab === "delete"
