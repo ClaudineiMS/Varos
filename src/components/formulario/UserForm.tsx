@@ -20,7 +20,10 @@ import { useUserEditByCpf } from "@/hooks/useUserEditByCpf";
 export default function UserForm(): JSX.Element {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState("basic");
+  // 🟢 Tipo explícito da aba para evitar o erro
+  const [activeTab, setActiveTab] = useState<"basic" | "edit" | "delete">(
+    "basic"
+  );
   const [userType, setUserType] = useState("Cliente");
   const [additionalTab, setAdditionalTab] = useState("basicInfo");
   const [cpfToEdit, setCpfToEdit] = useState("");
@@ -49,6 +52,7 @@ export default function UserForm(): JSX.Element {
   const complementoRef = useRef<HTMLInputElement>(null);
   const clientesRef = useRef<HTMLInputElement>(null);
 
+  // Preenche os campos ao carregar o usuário
   useEffect(() => {
     if (editingUser && userLoaded) {
       if (nomeRef.current) nomeRef.current.value = editingUser.nome || "";
@@ -70,6 +74,7 @@ export default function UserForm(): JSX.Element {
     }
   }, [editingUser, userLoaded]);
 
+  // Ajusta abas adicionais conforme tipo de usuário
   useEffect(() => {
     setAdditionalTab(userType === "Consultor" ? "addClient" : "basicInfo");
   }, [userType]);
@@ -87,7 +92,7 @@ export default function UserForm(): JSX.Element {
     setUserLoaded(true);
   };
 
-  const buildUserData = (): Object => ({
+  const buildUserData = (): Record<string, unknown> => ({
     tipoUsuario: userType,
     nome: nomeRef.current?.value || "",
     telefone: telefoneRef.current?.value || "",
@@ -107,9 +112,10 @@ export default function UserForm(): JSX.Element {
         : [],
   });
 
+  // ✅ Corrigido o tipo do CPF (usa string vazia se undefined)
   const handleUpdateOrCreate = async (data: any): Promise<void> => {
     if (activeTab === "edit" && editingUser) {
-      await updateUserByCpf(editingUser.cpf, data);
+      await updateUserByCpf(editingUser.cpf ?? "", data);
     } else if (userType === "Consultor") {
       await createConsultor(data);
     } else {
@@ -140,7 +146,8 @@ export default function UserForm(): JSX.Element {
     }
   };
 
-  const handleTabChange = (tab: string): void => {
+  // ✅ Tipagem correta da aba
+  const handleTabChange = (tab: "basic" | "edit" | "delete"): void => {
     if (activeTab === "edit" && userLoaded) resetEditState();
     setActiveTab(tab);
   };

@@ -1,11 +1,15 @@
 export interface User {
   id: number;
+  tipoUsuario: string;
   nome: string;
   email: string;
   telefone: string;
   cpf: string;
-  idade: number;
-  endereco: string;
+  idade?: number;
+  endereco?: string;
+  complemento?: string;
+  estado?: string;
+  cep?: string;
   criadoEm: string;
   atualizadoEm: string;
 }
@@ -19,7 +23,7 @@ export interface CreateUserData {
   nome: string;
   email: string;
   telefone?: string;
-  cpf?: string;
+  cpf: string;
   idade?: number;
   endereco?: string;
 }

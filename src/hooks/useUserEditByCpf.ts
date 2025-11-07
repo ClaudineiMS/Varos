@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useState } from "react";
 
 import { User, CreateUserData } from "@/types/User";
@@ -6,16 +7,15 @@ import {
   updateUserByCpf as apiUpdateUserByCpf,
 } from "@/lib/api";
 
-export function useUserEditByCpf(): Object {
+export function useUserEditByCpf() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Busca usuário pelo CPF
   const fetchUserByCpf = async (cpf: string): Promise<void> => {
     setLoading(true);
     setError(null);
-    setUser(null); // limpa usuário anterior
+    setUser(null);
     try {
       const data = await apiFetchUserByCpf(cpf);
       setUser(data);
@@ -26,11 +26,7 @@ export function useUserEditByCpf(): Object {
     }
   };
 
-  // Atualiza usuário pelo CPF
-  const updateUserByCpf = async (
-    cpf: string,
-    data: CreateUserData
-  ): Promise<void> => {
+  const updateUserByCpf = async (cpf: string, data: CreateUserData) => {
     setLoading(true);
     setError(null);
     try {
@@ -44,11 +40,17 @@ export function useUserEditByCpf(): Object {
     }
   };
 
-  // Limpa os dados do usuário (útil se quiser resetar o form)
   const resetUser = (): void => {
     setUser(null);
     setError(null);
   };
 
-  return { user, loading, error, fetchUserByCpf, updateUserByCpf, resetUser };
+  return {
+    user,
+    loading,
+    error,
+    fetchUserByCpf,
+    updateUserByCpf,
+    resetUser,
+  };
 }
