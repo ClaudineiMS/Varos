@@ -14,6 +14,7 @@ export function useUsers(): { users: User[]; loading: boolean } {
         setUsers(
           users.map((u) => ({
             id: u.id,
+            tipoUsuario: u.tipoUsuario || "Cliente",
             nome: u.nome,
             email: u.email,
             telefone: u.telefone,
