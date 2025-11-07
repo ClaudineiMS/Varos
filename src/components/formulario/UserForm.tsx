@@ -20,12 +20,13 @@ import { useUserEditByCpf } from "@/hooks/useUserEditByCpf";
 export default function UserForm(): JSX.Element {
   const router = useRouter();
 
-  // 🟢 Tipo explícito da aba para evitar o erro
   const [activeTab, setActiveTab] = useState<"basic" | "edit" | "delete">(
     "basic"
   );
-  const [userType, setUserType] = useState("Cliente");
-  const [additionalTab, setAdditionalTab] = useState("basicInfo");
+  const [userType, setUserType] = useState<"Cliente" | "Consultor">("Cliente");
+  const [additionalTab, setAdditionalTab] = useState<"basicInfo" | "addClient">(
+    "basicInfo"
+  );
   const [cpfToEdit, setCpfToEdit] = useState("");
   const [userLoaded, setUserLoaded] = useState(false);
 
@@ -40,19 +41,17 @@ export default function UserForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // refs
   const nomeRef = useRef<HTMLInputElement>(null);
   const telefoneRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const idadeRef = useRef<HTMLInputElement>(null);
   const cepRef = useRef<HTMLInputElement>(null);
   const cpfRef = useRef<HTMLInputElement>(null);
-  const estadoRef = useRef<HTMLInputElement>(null);
+  const estadoRef = useRef<HTMLSelectElement>(null);
   const enderecoRef = useRef<HTMLInputElement>(null);
   const complementoRef = useRef<HTMLInputElement>(null);
   const clientesRef = useRef<HTMLInputElement>(null);
 
-  // Preenche os campos ao carregar o usuário
   useEffect(() => {
     if (editingUser && userLoaded) {
       if (nomeRef.current) nomeRef.current.value = editingUser.nome || "";
@@ -74,7 +73,6 @@ export default function UserForm(): JSX.Element {
     }
   }, [editingUser, userLoaded]);
 
-  // Ajusta abas adicionais conforme tipo de usuário
   useEffect(() => {
     setAdditionalTab(userType === "Consultor" ? "addClient" : "basicInfo");
   }, [userType]);
@@ -112,7 +110,6 @@ export default function UserForm(): JSX.Element {
         : [],
   });
 
-  // ✅ Corrigido o tipo do CPF (usa string vazia se undefined)
   const handleUpdateOrCreate = async (data: any): Promise<void> => {
     if (activeTab === "edit" && editingUser) {
       await updateUserByCpf(editingUser.cpf ?? "", data);
@@ -146,7 +143,6 @@ export default function UserForm(): JSX.Element {
     }
   };
 
-  // ✅ Tipagem correta da aba
   const handleTabChange = (tab: "basic" | "edit" | "delete"): void => {
     if (activeTab === "edit" && userLoaded) resetEditState();
     setActiveTab(tab);
@@ -162,7 +158,6 @@ export default function UserForm(): JSX.Element {
   return (
     <div className="w-full max-w-[700px] mx-auto p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
       <HeaderButtons activeTab={activeTab} setActiveTab={handleTabChange} />
-
       <div className="border-t border-[rgba(255,255,255,0.1)] my-4" />
 
       {activeTab === "edit" && !userLoaded && (
