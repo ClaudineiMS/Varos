@@ -182,6 +182,4 @@ Apesar de funcional, o projeto ainda pode ser expandido em alguns pontos importa
 
 Este projeto foi um bom exercício de organização de código, estruturação de componentes, integração com APIs e aplicação de boas práticas em React e TypeScript, mas ainda há espaço para evolução e refinamento, especialmente em cenários com grande volume de dados.
 
-Desde já agradeço pela oportunidade de participar deste desafio.
-
 ---
